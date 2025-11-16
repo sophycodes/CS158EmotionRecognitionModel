@@ -75,7 +75,7 @@ train_loader = DataLoader(
 val_loader = DataLoader(
     val_dataset,          # 14 validation images (2 per emotion on average)
     batch_size=batch_size, # Process 32 at a time (will only have 1 batch of 14)
-    shuffle=False         # IMPORTANT: No shuffling for validation!
+    shuffle=False        
                          # - Ensures consistent evaluation across epochs
                          # - Makes validation scores comparable epoch-to-epoch
                          # - Allows reproducible results
