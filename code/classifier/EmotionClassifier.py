@@ -66,28 +66,21 @@ train_dataset, val_dataset = torch.utils.data.random_split(
 train_loader = DataLoader(
     train_dataset,        # The dataset to load from
     batch_size=32,        # Load 32 images at a time 
-    shuffle=True          # Randomize order each epoch (important for training!)
-                         # Prevents model from memorizing order
-                         # Each epoch sees different batch combinations
+    shuffle=True          # Randomize order each epoch, to prevent model from memorizing order
 )
 
-# Validation loader - for checking model performance DURING training
+# validation loader - for checking model performance during training
 val_loader = DataLoader(
     val_dataset,          # 14 validation images (2 per emotion on average)
     batch_size=batch_size, # Process 32 at a time (will only have 1 batch of 14)
-    shuffle=False        
-                         # - Ensures consistent evaluation across epochs
-                         # - Makes validation scores comparable epoch-to-epoch
-                         # - Allows reproducible results
-                         # - Order doesn't matter since we're not training on these
+    shuffle=False         # - Makes validation scores comparable epoch-to-epoch
 )
 
 # Test loader - for final evaluation AFTER training is complete
 test_loader = DataLoader(
     test_dataset,         # Completely separate test images
     batch_size=32,        # Process in batches of 32
-    shuffle=False         # Keep test order consistent (for reproducibility)
-                         # Same order every run = same final score
+    shuffle=False         # Keep test order consistent (for reproducibility),  Same order every run = same final score                  
 )
 
 # Print dataset info for verification
