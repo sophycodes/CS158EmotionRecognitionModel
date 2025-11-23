@@ -11,6 +11,14 @@ import pandas as pd
 from tqdm import tqdm
 import os
 
+"""
+Facial Emotion Recognition using CNN
+CS158 Final Project 2025
+Authors: Aiko Kato, Bengisu Bulur, Sophy Figaroa
+
+This script handles data loading and preprocessing for emotion recognition.
+"""
+
 # Check if GPU is available
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"Using device: {device}")

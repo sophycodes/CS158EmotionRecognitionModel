@@ -1,6 +1,9 @@
 """
 SmallDataTrainer.py
 Train a small CNN on a tiny dataset (10 images per emotion)
+
+Loss Function: cross-entropy loss
+Algorithm: ADAM (gradient descent w/two moving averages for each weight Average of recent gradients (momentum) + Average of recent squared gradients)
 """
 
 import torch

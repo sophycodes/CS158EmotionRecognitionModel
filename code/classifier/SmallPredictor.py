@@ -2,7 +2,13 @@
 SmallPredictor.py
 Use the small CNN (trained on 10 images per emotion) to predict emotion from a single input image
 Run python SmallPredictor.py path/to/image.jpg
+
+# We can do normal gradient descent 
+Loss Function: cross-entropy loss
+Algorithm: ADAM (gradient descent w/two moving averages for each weight Average of recent gradients (momentum) + Average of recent squared gradients)
 """
+
+
 
 import torch
 import torch.nn as nn
