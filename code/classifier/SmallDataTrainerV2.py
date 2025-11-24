@@ -92,7 +92,7 @@ def train_one_epoch(model, train_loader, criterion, optimizer, epoch, total_epoc
     total = 0
     
     for images, labels in train_loader:
-        images, labels = images.to(DEVICE), labels.to(DEVICE)
+        images, labels = images.to(device), labels.to(device)
         
         # Forward pass
         optimizer.zero_grad()
@@ -129,7 +129,7 @@ def evaluate(model, val_loader, criterion, class_names):
     
     with torch.no_grad():
         for images, labels in val_loader:
-            images, labels = images.to(DEVICE), labels.to(DEVICE)
+            images, labels = images.to(device), labels.to(device)
             
             outputs = model(images)
             loss = criterion(outputs, labels)

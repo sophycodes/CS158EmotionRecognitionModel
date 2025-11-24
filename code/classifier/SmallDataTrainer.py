@@ -17,6 +17,7 @@ import seaborn as sns
 import numpy as np
 import os
 
+
 # configuration
 
 img_size = 48  # resize images to 48×48

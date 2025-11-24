@@ -1,0 +1,162 @@
+{
+  "model_name": "simple_cnn",
+  "hyperparameters": {
+    "epochs": 5,
+    "batch_size": 32,
+    "learning_rate": 0.001
+  },
+  "final_val_accuracy": 0.0,
+  "final_train_accuracy": 0.6,
+  "per_class_metrics": {
+    "angry": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "disgust": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 2.0
+    },
+    "fear": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 2.0
+    },
+    "happy": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 4.0
+    },
+    "neutral": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "sad": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "surprise": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 2.0
+    },
+    "accuracy": 0.0,
+    "macro avg": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 14.0
+    },
+    "weighted avg": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 14.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      2
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0
+    ]
+  ],
+  "training_history": {
+    "train_loss": [
+      1.9770087599754333,
+      1.8817498087882996,
+      1.7696223855018616,
+      1.637490689754486,
+      1.4983649849891663
+    ],
+    "train_accuracy": [
+      0.12727272727272726,
+      0.21818181818181817,
+      0.2545454545454545,
+      0.5272727272727272,
+      0.6
+    ],
+    "val_loss": [
+      2.0703237056732178,
+      2.09389328956604,
+      2.0977089405059814,
+      2.101724863052368,
+      2.1141257286071777
+    ],
+    "val_accuracy": [
+      0.0,
+      0.07142857142857142,
+      0.14285714285714285,
+      0.07142857142857142,
+      0.0
+    ]
+  }
+}
