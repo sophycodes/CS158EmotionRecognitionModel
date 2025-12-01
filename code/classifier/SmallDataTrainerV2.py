@@ -148,12 +148,16 @@ def evaluate(model, val_loader, criterion, class_names):
     print(f"Validation - Loss: {avg_loss:.4f}, Val Acc: {accuracy:.4f}")
     
     # Calculate per-class metrics
+    # FIX: Specify all possible labels (0-6 for 7 classes)
+    labels = list(range(len(class_names)))
+    
     report = classification_report(all_labels, all_preds, 
+                                   labels=labels,  # ADDED
                                    target_names=class_names,
                                    output_dict=True,
                                    zero_division=0)
     
-    cm = confusion_matrix(all_labels, all_preds)
+    cm = confusion_matrix(all_labels, all_preds, labels=labels)  # ADDED labels here too
     
     return avg_loss, accuracy, report, cm, all_labels, all_preds
 
@@ -314,7 +318,8 @@ def train(args):
     
     # Print classification report
     print("\nPer-Class Performance:")
-    print(classification_report(y_true, y_pred, target_names=class_names))
+    labels = list(range(len(class_names)))
+    print(classification_report(y_true, y_pred, labels=labels, target_names=class_names, zero_division=0))
     
     # Save results
     args.trained_model = model  # Store for saving
