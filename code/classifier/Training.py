@@ -1,15 +1,15 @@
 """
-SmallDataTrainerV2.py
+Trainer.py
 Train emotion recognition models with command-line arguments
 
 Loss Function: cross-entropy loss
 Algorithm: ADAM (gradient descent w/two moving averages for each weight Average of recent gradients (momentum) + Average of recent squared gradients)
 Usage:
-    python SmallDataTrainerV2.py --model simple_cnn --epochs 20 --batch_size 32 --lr 0.001
     python SmallDataTrainerV2.py --model feedforward --epochs 30
-    python SmallDataTrainerV2.py --model medium_cnn --epochs 50 --batch_size 64
+    python SmallDataTrainerV2.py --model simple_cnn --epochs 20 --batch_size 32 --lr 0.001
+    python SmallDataTrainerV2.py --model medium_cnn --epochs 50 --batch_size 64 --lr 0.001
+    python SmallDataTrainerV2.py --model large_cnn --epochs 50 --batch_size 64 --lr 0.001
 """
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -23,9 +23,6 @@ import os
 import json
 import argparse
 from datetime import datetime
-
-
-
 
 # Configuration (can be overridden by command-line args)
 img_size = 48
