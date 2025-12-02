@@ -70,11 +70,33 @@ def run_live_demo(model_path, device, show_confidence=True):
         cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
     )
     
-    # Start webcam
-    cap = cv2.VideoCapture(0)
-    
-    if not cap.isOpened():
-        print("Error: Could not open webcam")
+    # Try to find working camera
+    cap = None
+    for camera_index in range(5):  # Try first 5 camera indices
+        print(f"Trying camera index {camera_index}...")
+        test_cap = cv2.VideoCapture(camera_index)
+        if test_cap.isOpened():
+            # Wait a moment for camera to initialize
+            import time
+            time.sleep(0.5)
+            # Test if we can actually read a frame
+            ret, _ = test_cap.read()
+            if ret:
+                print(f"✅ Using camera index: {camera_index}")
+                cap = test_cap
+                break
+            else:
+                test_cap.release()
+        else:
+            test_cap.release()
+
+    if cap is None:
+        print("❌ Error: Could not open any webcam")
+        print("\nTroubleshooting:")
+        print("1. System Settings → Privacy & Security → Camera")
+        print("2. Add Terminal.app and toggle it ON")
+        print("3. Close Terminal completely (Cmd+Q) and reopen")
+        print("4. Close other apps using camera (Zoom, Teams, etc.)")
         return
     
     print("\n" + "="*60)
