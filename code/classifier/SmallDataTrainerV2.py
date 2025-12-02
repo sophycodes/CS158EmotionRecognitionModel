@@ -24,8 +24,8 @@ import json
 import argparse
 from datetime import datetime
 
-# Import all model architectures from models.py
-from models import BasicNN, SimpleCNN, MediumCNN
+
+
 
 # Configuration (can be overridden by command-line args)
 img_size = 48
@@ -65,6 +65,9 @@ def get_data_loaders(batch_size, dataset_path='../../dataset'):
     return train_loader, val_loader, class_names, num_classes
 
 
+# Import all model architectures from models.py
+from models import BasicNN, SimpleCNN, MediumCNN, LargeCNN  # ADD LargeCNN
+
 def get_model(model_name, num_classes):
     """Create model based on name"""
 
@@ -74,8 +77,10 @@ def get_model(model_name, num_classes):
         model = SimpleCNN(num_classes)
     elif model_name == 'medium_cnn':
         model = MediumCNN(num_classes)
+    elif model_name == 'large_cnn':  # ADD THIS
+        model = LargeCNN(num_classes)
     else:
-        raise ValueError(f"Unknown model: {model_name}. Choose from: basic_nn, simple_cnn, medium_cnn")
+        raise ValueError(f"Unknown model: {model_name}. Choose from: basic_nn, simple_cnn, medium_cnn, large_cnn")
 
     return model.to(device)
 
@@ -333,7 +338,7 @@ def main():
     
     # Model selection
     parser.add_argument('--model', type=str, required=True,
-                       choices=['feedforward', 'simple_cnn', 'medium_cnn'],
+                       choices=['basic_nn', 'simple_cnn', 'medium_cnn', 'large_cnn'],
                        help='Model architecture to train')
     
     # Training hyperparameters
