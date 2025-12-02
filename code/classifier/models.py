@@ -158,3 +158,4 @@ class LargeCNN(nn.Module):
     def forward(self, x):
         """Forward pass through the network"""
         return self.layers(x)
+    
