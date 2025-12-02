@@ -11,7 +11,7 @@ import cv2
 from torchvision import transforms
 import argparse
 
-# Import your model from models.py (much cleaner!)
+# Import model from models.py
 from models import LargeCNN
 
 
@@ -27,7 +27,7 @@ def load_model(model_path, device):
 def preprocess_face(face_img):
     """
     Preprocess face image to match training preprocessing
-    Must match exactly: Grayscale -> Resize(48x48) -> ToTensor -> Normalize(0.5, 0.5)
+    Grayscale -> Resize(48x48) -> ToTensor -> Normalize(0.5, 0.5)
     """
     transform = transforms.Compose([
         transforms.ToPILImage(),
@@ -82,7 +82,7 @@ def run_live_demo(model_path, device, show_confidence=True):
             # Test if we can actually read a frame
             ret, _ = test_cap.read()
             if ret:
-                print(f"✅ Using camera index: {camera_index}")
+                print(f"Using camera index: {camera_index}")
                 cap = test_cap
                 break
             else:
@@ -91,7 +91,7 @@ def run_live_demo(model_path, device, show_confidence=True):
             test_cap.release()
 
     if cap is None:
-        print("❌ Error: Could not open any webcam")
+        print("Error: Could not open any webcam")
         print("\nTroubleshooting:")
         print("1. System Settings → Privacy & Security → Camera")
         print("2. Add Terminal.app and toggle it ON")
