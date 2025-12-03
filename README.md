@@ -1,6 +1,6 @@
 # CS158 Emotion Recognition Model
 
-![Project Banner](insideOut.png)
+![Project Banner](insideOut.jpg)
 
 **CS158 Final Project - Fall 2025**
 
