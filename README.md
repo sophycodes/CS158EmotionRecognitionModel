@@ -4,14 +4,14 @@
 
 A deep learning system for recognizing facial emotions using Convolutional Neural Networks (CNNs).
 
-## Team Members
+## Members
 - Aiko Kato
 - Bengisu Bulur  
 - Sophy Figaroa
 
 ## Project Overview
 
-This project implements a facial emotion recognition system that classifies facial expressions into seven emotion categories:
+This project implements a facial emotion recognition system that classifies facial expressions into 7 emotion categories:
 - Angry
 - Disgust
 - Fear
@@ -50,8 +50,7 @@ We implemented and compared three CNN architectures:
    - Training accuracy: 81%
    - Validation accuracy: 72%
 
-### Current Performance
-
+### Best Performance
 Our best model large_cnn_20epoch_0.01lr achieves:
    - Training accuracy: 81%
    - Validation accuracy: 72%
@@ -116,19 +115,13 @@ python -c "import torch; import cv2; import numpy; print('Installation successfu
 
 ### Downloading Pre-trained Models
 
-Our trained models are available in the repository under the `models/` directory:
+Our trained models are available in the repository under the `models_results/` directory:
 
 ```
-models/
+models_results/
 ├── large_cnn_20epoch_0.001lr         # best model
 
 ```
-
-If models aren't included in the repo, download them from:
-- [Google Drive Link] (Add your link here)
-- [HPC Storage] (If applicable)
-
-Place downloaded models in the `models/` directory.
 
 ### Loading a Trained Model
 
