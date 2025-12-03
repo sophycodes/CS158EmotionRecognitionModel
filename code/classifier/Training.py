@@ -1,5 +1,5 @@
 """
-Trainer.py
+trainer.py
 Train emotion recognition models with command-line arguments
 Facial Emotion Recognition using CNN
 CS158 Final Project 2025
