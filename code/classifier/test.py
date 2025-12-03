@@ -87,7 +87,7 @@ def evaluate_model(model, test_loader, criterion, class_names):
     total = 0
     total_loss = 0.0
     
-    print("\nEvaluating model on test set...")
+    print("\nEvaluating model on test set")
     
     with torch.no_grad():
         for images, labels in test_loader:
@@ -99,17 +99,16 @@ def evaluate_model(model, test_loader, criterion, class_names):
             
             # Track loss
             total_loss += loss.item()
-            
             # Get predictions
             preds = torch.argmax(outputs, dim=1)
-            
-            # Track predictions
-            all_preds.extend(preds.cpu().numpy())
-            all_labels.extend(labels.cpu().numpy())
             
             # Track accuracy
             correct += (preds == labels).sum().item()
             total += labels.size(0)
+            
+            # Track predictions
+            all_preds.extend(preds.cpu().numpy())
+            all_labels.extend(labels.cpu().numpy())
     
     # Calculate metrics
     avg_loss = total_loss / len(test_loader)

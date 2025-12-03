@@ -136,33 +136,40 @@ def evaluate(model, val_loader, criterion, class_names):
         for images, labels in val_loader:
             images, labels = images.to(device), labels.to(device)
             
+            # Forward pass
             outputs = model(images)
             loss = criterion(outputs, labels)
             
+            # Track loss
             total_loss += loss.item()
+            # Get predictions
             preds = torch.argmax(outputs, dim=1)
+            
+            # Track accuracy
             correct += (preds == labels).sum().item()
             total += labels.size(0)
             
+            # Track predictions
             all_preds.extend(preds.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
-    
+            
+    # Calculate metrics
     avg_loss = total_loss / len(val_loader)
     accuracy = correct / total
     
     print(f"Validation - Loss: {avg_loss:.4f}, Val Acc: {accuracy:.4f}")
     
     # Calculate per-class metrics
-    # FIX: Specify all possible labels (0-6 for 7 classes)
     labels = list(range(len(class_names)))
     
     report = classification_report(all_labels, all_preds, 
-                                   labels=labels,  # ADDED
+                                   labels=labels, 
                                    target_names=class_names,
                                    output_dict=True,
                                    zero_division=0)
     
-    cm = confusion_matrix(all_labels, all_preds, labels=labels)  # ADDED labels here too
+    # Calculate confusion matrix
+    cm = confusion_matrix(all_labels, all_preds, labels=labels)
     
     return avg_loss, accuracy, report, cm, all_labels, all_preds
 
