@@ -53,7 +53,7 @@ def load_test_data(test_path, batch_size=64):
     """
     Load test dataset with same preprocessing as training
     """
-    # Same preprocessing pipeline as training
+    #Same preprocessing pipeline as training
     transform = transforms.Compose([
         transforms.Grayscale(num_output_channels=1),
         transforms.Resize((img_size, img_size)),
@@ -62,7 +62,6 @@ def load_test_data(test_path, batch_size=64):
     ])
     
     # Load test dataset
-    # automatically creates class names from dataset folder structure.
     test_dataset = datasets.ImageFolder(test_path, transform=transform)
     class_names = test_dataset.classes
     num_classes = len(class_names)
@@ -76,16 +75,17 @@ def load_test_data(test_path, batch_size=64):
     return test_loader, class_names, num_classes
 
 
-def evaluate_model(model, test_loader, class_names):
+def evaluate_model(model, test_loader, criterion, class_names):
     """
-    Evaluate model on test set and return metrics
+    Evaluate model on test set and return metrics including loss
     """
     model.eval()
-    correct = 0
-    total = 0
+    
     all_preds = []
     all_labels = []
-
+    correct = 0
+    total = 0
+    total_loss = 0.0
     
     print("\nEvaluating model on test set...")
     
@@ -95,6 +95,12 @@ def evaluate_model(model, test_loader, class_names):
             
             # Forward pass
             outputs = model(images)
+            loss = criterion(outputs, labels)
+            
+            # Track loss
+            total_loss += loss.item()
+            
+            # Get predictions
             preds = torch.argmax(outputs, dim=1)
             
             # Track predictions
@@ -105,9 +111,12 @@ def evaluate_model(model, test_loader, class_names):
             correct += (preds == labels).sum().item()
             total += labels.size(0)
     
-    # Calculate overall accuracy
+    # Calculate metrics
+    avg_loss = total_loss / len(test_loader)
     accuracy = correct / total
-    print(f"\nTest Accuracy: {accuracy:.4f} ({correct}/{total})")
+    
+    print(f"\nTest Loss: {avg_loss:.4f}")
+    print(f"Test Accuracy: {accuracy:.4f} ({correct}/{total})")
     
     # Calculate confusion matrix
     labels = list(range(len(class_names)))
@@ -124,7 +133,7 @@ def evaluate_model(model, test_loader, class_names):
     print("\nClassification Report:")
     print(report)
     
-    return accuracy, cm, report, all_labels, all_preds
+    return avg_loss, accuracy, cm, report, all_labels, all_preds
 
 
 def plot_confusion_matrix(cm, class_names, save_path):
@@ -173,9 +182,9 @@ def plot_per_class_accuracy(cm, class_names, save_path):
     plt.close()
 
 
-def save_results(accuracy, cm, report, class_names, save_dir):
+def save_results(test_loss, accuracy, cm, report, class_names, save_dir):
     """
-    Save all evaluation results
+    Save all evaluation results including loss
     """
     os.makedirs(save_dir, exist_ok=True)
     
@@ -183,6 +192,7 @@ def save_results(accuracy, cm, report, class_names, save_dir):
     with open(f"{save_dir}/test_results.txt", 'w') as f:
         f.write(f"Test Set Evaluation Results\n")
         f.write(f"{'='*50}\n\n")
+        f.write(f"Test Loss: {test_loss:.4f}\n")
         f.write(f"Overall Accuracy: {accuracy:.4f}\n\n")
         f.write(f"Classification Report:\n")
         f.write(report)
@@ -255,9 +265,12 @@ def main():
     total_params = sum(p.numel() for p in model.parameters())
     print(f"Total parameters: {total_params:,}\n")
     
+    # Create loss criterion (same as training)
+    criterion = nn.CrossEntropyLoss()
+    
     # Evaluate model
-    accuracy, cm, report, y_true, y_pred = evaluate_model(
-        model, test_loader, class_names
+    test_loss, accuracy, cm, report, y_true, y_pred = evaluate_model(
+        model, test_loader, criterion, class_names
     )
     
     # Create output directory
@@ -266,10 +279,11 @@ def main():
         args.output_dir = f"test_results_{args.model_type}_{timestamp}"
     
     # Save results
-    save_results(accuracy, cm, report, class_names, args.output_dir)
+    save_results(test_loss, accuracy, cm, report, class_names, args.output_dir)
     
     print(f"\n{'='*60}")
     print(f"Testing Complete!")
+    print(f"Final Test Loss: {test_loss:.4f}")
     print(f"Final Test Accuracy: {accuracy:.4f}")
     print(f"Results saved to: {args.output_dir}")
     print(f"{'='*60}\n")
