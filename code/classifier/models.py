@@ -1,6 +1,9 @@
 """
 models.py
 All model architectures in one place
+Facial Emotion Recognition using CNN
+CS158 Final Project 2025
+Authors: Aiko Kato, Bengisu Bulur, Sophy Figaroa
 """
 import torch
 import torch.nn as nn

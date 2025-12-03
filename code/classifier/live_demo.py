@@ -2,6 +2,8 @@
 live_demo.py
 Real-time emotion recognition using webcam
 
+from video: https://www.youtube.com/watch?v=Bb4Wvl57LIk&t=1538s
+
 Usage:
     python live_demo.py --model_path results/large_cnn_20241201_123456/model.pth
 """
@@ -70,6 +72,7 @@ def run_live_demo(model_path, device, show_confidence=True):
         cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
     )
     
+    #CHATGPT helped with this because we couldn't figure out how to get the webcam to work
     # Try to find working camera
     cap = None
     for camera_index in range(5):  # Try first 5 camera indices
