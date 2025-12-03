@@ -1,5 +1,7 @@
 # CS158 Emotion Recognition Model
 
+![Project Banner](insideOut.png)
+
 **CS158 Final Project - Fall 2025**
 
 A deep learning system for recognizing facial emotions using Convolutional Neural Networks (CNNs).
