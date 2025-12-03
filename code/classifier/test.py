@@ -9,7 +9,13 @@ Loss Function: cross-entropy loss
 Algorithm: ADAM (gradient descent w/two moving averages for each weight Average of recent gradients (momentum) + Average of recent squared gradients)
 
 Usage:
-    python test_model.py --model_path results/large_cnn_TIMESTAMP/model.pth --model_type large_cnn
+    python test.py --model_path results/large_cnn_TIMESTAMP/model.pth --model_type large_cnn --test_path /path/to/test/data
+    python test.py \
+    --model_path results/large_cnn_20251202_143022/model.pth \
+    --model_type large_cnn \
+    --test_path /cs158/TestData/images/test \
+    --batch_size 128 \
+    --output_dir evaluation_results/
 """
 
 import torch
