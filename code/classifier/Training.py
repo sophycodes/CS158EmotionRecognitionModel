@@ -1,6 +1,9 @@
 """
 Trainer.py
 Train emotion recognition models with command-line arguments
+Facial Emotion Recognition using CNN
+CS158 Final Project 2025
+Authors: Aiko Kato, Bengisu Bulur, Sophy Figaroa
 
 Loss Function: cross-entropy loss
 Algorithm: ADAM (gradient descent w/two moving averages for each weight Average of recent gradients (momentum) + Average of recent squared gradients)
