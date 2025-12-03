@@ -53,7 +53,7 @@ def load_test_data(test_path, batch_size=64):
     """
     Load test dataset with same preprocessing as training
     """
-    # CRITICAL: Same preprocessing pipeline as training
+    # Same preprocessing pipeline as training
     transform = transforms.Compose([
         transforms.Grayscale(num_output_channels=1),
         transforms.Resize((img_size, img_size)),
@@ -62,6 +62,7 @@ def load_test_data(test_path, batch_size=64):
     ])
     
     # Load test dataset
+    # automatically creates class names from dataset folder structure.
     test_dataset = datasets.ImageFolder(test_path, transform=transform)
     class_names = test_dataset.classes
     num_classes = len(class_names)
@@ -80,11 +81,11 @@ def evaluate_model(model, test_loader, class_names):
     Evaluate model on test set and return metrics
     """
     model.eval()
-    
-    all_preds = []
-    all_labels = []
     correct = 0
     total = 0
+    all_preds = []
+    all_labels = []
+
     
     print("\nEvaluating model on test set...")
     
