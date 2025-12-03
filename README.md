@@ -127,13 +127,13 @@ models_results/
 
 ```python
 import torch
-from models import MediumCNN  # or SimpleCNN, LargeCNN
+from models import LargeCNN  # or SimpleCNN, MediumCNN
 
 # Load the model architecture
-model = MediumCNN()
+model = LargeCNN()
 
 # Load trained weights
-model.load_state_dict(torch.load('models/medium_cnn.pth'))
+model.load_state_dict(torch.load('models/large_cnn.pth'))
 model.eval()  # Set to evaluation mode
 
 ```
